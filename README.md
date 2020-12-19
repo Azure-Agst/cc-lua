@@ -2,6 +2,11 @@
 
 idk its christmas break and im bored
 
+pastebin program doesnt work in 1.75 so here's a oneliner:
+```lua
+f=fs.open("i","w")f.write(http.get("https://raw.githubusercontent.com/Azure-Agst/cc-lua/main/enroll.lua").readAll())f.flush()f.close()dofile("i")fs.delete("i")exit()
+```
+
 ## notes:
 
 ### Regarding importing
