@@ -4,6 +4,7 @@
 baseurl = "https://raw.githubusercontent.com/Azure-Agst/cc-lua/main/"
 clientFiles = { "json.lua" }
 version = ""
+installed = false;
 -- every version has a startup.lua that gets handled seperately
 
 print("CC Enrollment Script")
@@ -11,15 +12,18 @@ print("(c) 2020 Azure-Agst")
 print("")
 
 function main()
-    while true do
+    while not installed do
         print("Client/Server? [C/S]")
         res = io.read()
         if res=="C" or res=="c" then
             -- client install code
             clientInstall()
+            installed = true
+            return
         elseif res=="S" or res=="s" then
             -- server install code
-            version = "server"
+            installed = true
+            return
         else
             print("Not a valid response!\n")
         end
@@ -27,28 +31,34 @@ function main()
 end
 
 function clientInstall()
-    print("installing client code...")
+    version = "client"
+    print("Install Client...")
 
     -- check if client folder exists
     --local clientExists = false
     --if fs.exists("client") then clientExists = true end
 
-    -- iterate over files in list
+    -- iterate over files in folder
     for i,v in ipairs(clientFiles) do
-        print(" - Installing "..v)
-
-        --local s = string.find(v, ".lua")
-        --local name = string.sub(v, 1, s)
-
-        local req = http.get(baseurl .. "client/" .. v)
-        print("    - Response Code: "..req.getResponseCode())
-        local file = fs.open("client/"..v, "w")
-        
-        file.write(req.readAll())
-        file.flush()
-        file.close()
-        req.close()
+        print(" - Get "..v)
+        getFile(v, "client/"..v)
     end
+
+    -- startup
+    print(" - Get startup")
+    getFile("startup.lua", "startup")
+
+    -- should be done!
+end
+
+function getFile(name, loc)
+    local req = http.get(baseurl..version.."/"..name)
+    local file = fs.open(loc, "w")
+    file.write(req.readAll())
+    file.flush()
+    file.close()
+    req.close()
 end
 
 main()
+exit()
