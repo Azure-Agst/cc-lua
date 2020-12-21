@@ -4,12 +4,22 @@
 baseurl = "https://raw.githubusercontent.com/Azure-Agst/cc-lua/main/"
 clientFiles = { "json.lua" }
 version = ""
-installed = false;
+
 -- every version has a startup.lua that gets handled seperately
 
 print("CC Enrollment Script")
 print("(c) 2020 Azure-Agst")
 print("")
+
+
+function log(str)
+    print(str)
+
+end
+
+function checkInstall()
+
+end
 
 function main()
     while not installed do
@@ -32,7 +42,7 @@ end
 
 function clientInstall()
     version = "client"
-    print("Install Client...")
+    print("\nInstall Client...")
 
     -- check if client folder exists
     --local clientExists = false

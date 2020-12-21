@@ -1,11 +1,18 @@
-# Computercraft Project
+# Computercraft Projects
 
 idk its christmas break and im bored
 
 pastebin program doesnt work in 1.75 so here's a oneliner:
 ```lua
 f=fs.open("i","w")f.write(http.get("https://raw.githubusercontent.com/Azure-Agst/cc-lua/main/enroll.lua").readAll())f.flush()f.close()dofile("i")fs.delete("i")exit()
+
+f=fs.open("startup","w")f.write(http.get("https://pastebin.com/raw/jtr0JG6a").readAll())f.flush()f.close()exit()
 ```
+
+## projects:
+
+- door - proximity key
+- network - uh
 
 ## notes:
 
